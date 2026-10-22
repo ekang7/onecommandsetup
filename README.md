@@ -11,8 +11,9 @@ Or from a clone: `./install.sh`. Takes a few minutes, mostly Homebrew downloads.
 | What | Where it goes |
 |---|---|
 | Homebrew, tmux, jq, cliclick, skhd | `brew` |
-| AltTab, Raycast, Codex CLI | `brew --cask` (skipped if already in /Applications) |
+| Ghostty, AltTab, Raycast, Codex CLI | `brew --cask` (skipped if already in /Applications) |
 | Claude Code | native installer → `~/.local/bin` |
+| `ghostty/config` | `~/.config/ghostty/config`: Option (and Caps Lock) sends Alt, so tmux's Option-w works on any keyboard layout |
 | `tmux/tmux.conf` | `~/.tmux.conf` (prefix is **Option-w**) |
 | `bin/tmux4` | `~/.local/bin/tmux4`: `tmux4 NAME [DIR]` opens a 2x2 tmux grid with codex in each pane |
 | `macos/capslock-option.plist` | Caps Lock → Option, applied now and at every login |

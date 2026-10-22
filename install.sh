@@ -123,10 +123,12 @@ step "tmux"                         brew install tmux
 step "jq (statusline dependency)"   brew install jq
 step "cliclick (skhd dependency)"   brew install cliclick
 step "skhd"                         brew install koekeishiya/formulae/skhd
+step "Ghostty"                      cask ghostty Ghostty.app
 step "AltTab"                       cask alt-tab AltTab.app
 step "Raycast"                      cask raycast Raycast.app
 step "Codex CLI"                    bash -c 'command -v codex || brew install --cask codex'
 step "Claude Code"                  install_claude
+step "Ghostty config"               put "$DIR/ghostty/config" ~/.config/ghostty/config
 step "tmux config"                  tmux_conf
 step "tmux4 command"                tmux4
 step "Caps Lock -> Option"          capslock_option

@@ -1,0 +1,3 @@
+# Send Option as Alt on any keyboard layout (Ghostty only defaults to this on U.S. layouts).
+# `true`, not `left`: Caps Lock is mapped to Right Option, and it drives tmux's Option-w prefix.
+macos-option-as-alt = true
