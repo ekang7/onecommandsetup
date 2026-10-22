@@ -43,12 +43,3 @@ Read first:          <files in order, one line each on why>
 ```
 
 Cite `file:line` for every claim. Mark anything inferred rather than read as "(inferred)".
-
-## In a live interview
-
-- Narrate as you learn: "The Board is a 2D grid of Cells, and each cell tracks its own state and neighbors." Reading out loud is signal; silence reads as dead air.
-- It's fine to say "I want to understand the codebase before I change it." Jumping straight to prompting is a known failure signal.
-- Be seen in the files, not just in summaries.
-- Before bringing this skill (or any SKILL.md / CLAUDE.md) into an interview, ask first. The interviewer has to separate your judgment from your tooling's.
-
-Source: Hello Interview, "Codebase Orientation" (Learn AI Coding -> Fundamentals).
