@@ -25,6 +25,8 @@ Each step runs on its own, so one failure doesn't stop the rest. A report at the
 **After it runs** (macOS won't let a script do these):
 1. Privacy & Security → Accessibility: enable skhd and AltTab (AltTab also needs Screen Recording).
 2. Raycast onboarding → set hotkey ⌘Space.
-3. `claude` and `codex login` to sign in.
+3. Sign in: `claude`, and for Codex `codex login` (ChatGPT account) or `printenv OPENAI_API_KEY | codex login --with-api-key` (API key).
+
+In Codex, invoke a skill with `$skill-name` (e.g. `$tdd-verification`). In Claude Code, use `/skill-name`.
 
 Fork it? Set `DOTFILES_REPO=you/dotfiles` before running.

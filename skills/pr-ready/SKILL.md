@@ -13,9 +13,10 @@ description: Use before declaring any change done. Reviews the diff as a product
    - Inputs are validated at boundaries
    - Types are explicit; no unchecked `Any`
    - No secrets or patient data in code, logs, or tests
-3. Run tests, type checker, and linter. All must pass.
+3. Run the tests, type checker, and linter that the project has. All must pass.
 
 ## Write PR.md
+Do not commit PR.md unless the user asks.
 - What changed and why (two to four sentences)
 - How it works (key functions, in order)
 - Design decisions and trade-offs considered

@@ -139,7 +139,8 @@ ${Y}${B}Manual steps (macOS won't let a script do these):${N}
   1. System Settings → Privacy & Security → Accessibility: enable ${B}skhd${N} and ${B}AltTab${N}
      (AltTab also needs Screen Recording). Then: skhd --restart-service
   2. Raycast: finish onboarding and set its hotkey to ⌘Space.
-  3. Sign in: run ${B}claude${N} and ${B}codex login${N}.
+  3. Sign in: run ${B}claude${N}, and for Codex either ${B}codex login${N} or, with an API key,
+     ${B}printenv OPENAI_API_KEY | codex login --with-api-key${N}
   4. Open a new terminal so PATH changes apply.
 EOF
 [ ${#FAILED[@]} -eq 0 ]

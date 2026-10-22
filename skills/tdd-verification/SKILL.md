@@ -14,11 +14,11 @@ description: Use when implementing any feature or fix. Write and agree on tests 
    - Duplicates
    - Invalid or malformed input
    - Scale, if performance matters
-3. Write the tests against the intended interface. Run them. Confirm they fail for the right reason.
+3. Write the tests against the intended interface, using the project's existing test framework and layout. If there is none, ask before adding one. Run them. Confirm they fail for the right reason.
 
 ## Implementing
 4. Implement the smallest change that makes the tests pass. Follow existing codebase patterns.
-5. Run the full test suite and the type checker or linter (e.g. `pytest`, `mypy`, `ruff`) after each milestone, not only at the end.
+5. Run the full test suite and the project's type checker and linter, if it has them (e.g. `pytest`, `mypy`, `ruff`) after each milestone, not only at the end.
 
 ## When a test fails
 6. State a hypothesis for the failure before changing code. Change one thing at a time.
