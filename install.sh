@@ -28,7 +28,7 @@ step() { # step <name> <cmd...>: run, log, record result, never abort
   if "$@" >>"$LOG" 2>&1 </dev/null; then
     OK+=("$name"); echo "${G}ok${N} ($((SECONDS - t))s)"
   else
-    FAILED+=("$name"); echo "${R}FAILED${N} ($((SECONDS - t))s)"
+    FAILED+=("$name: $(tail -n 1 "$LOG")"); echo "${R}FAILED${N} ($((SECONDS - t))s)"
   fi
 }
 
@@ -40,7 +40,8 @@ put() { # put <src> <dst>: copy, backing up an existing different file first
   cp "$1" "$2"
 }
 
-profile_line() { grep -qsF "$1" ~/.zprofile || echo "$1" >>~/.zprofile; }
+# ~/.zshrc, not ~/.zprofile: every interactive zsh reads it, including editor terminals that skip login files.
+profile_line() { grep -qsF "$1" ~/.zshrc || echo "$1" >>~/.zshrc; }
 
 install_brew() {
   if ! command -v brew >/dev/null; then
@@ -55,7 +56,7 @@ install_brew() {
 
 cask() { # cask <token> <App.app>: skip if the app is already present
   [ -d "/Applications/$2" ] || brew install --cask "$1" || return 1
-  open -a "${2%.app}"
+  open "/Applications/$2" # by path: `open -a <name>` can't find an app installed seconds ago
 }
 
 skhd_service() {
@@ -64,6 +65,13 @@ skhd_service() {
   [ -f ~/Library/LaunchAgents/com.koekeishiya.skhd.plist ] || "$bin" --install-service || return 1
   "$bin" --restart-service 2>/dev/null || "$bin" --start-service
 }
+
+capslock_option() { # apply now, and at every login via a launch agent
+  put "$DIR/macos/capslock-option.plist" ~/Library/LaunchAgents/local.capslock-option.plist \
+    && hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x7000000E6}]}' >/dev/null
+}
+
+tmux4() { put "$DIR/bin/tmux4" ~/.local/bin/tmux4 && chmod +x ~/.local/bin/tmux4; }
 
 tmux_conf() { put "$DIR/tmux/tmux.conf" ~/.tmux.conf && { tmux source-file ~/.tmux.conf 2>/dev/null || true; }; }
 
@@ -117,6 +125,8 @@ step "Raycast"                      cask raycast Raycast.app
 step "Codex CLI"                    bash -c 'command -v codex || brew install --cask codex'
 step "Claude Code"                  install_claude
 step "tmux config"                  tmux_conf
+step "tmux4 command"                tmux4
+step "Caps Lock -> Option"          capslock_option
 step "skhd config + service"        skhd_service
 step "Cmd+Space freed for Raycast"  raycast_hotkey
 step "Claude Code settings"         claude_config
@@ -143,6 +153,7 @@ ${Y}${B}Manual steps (macOS won't let a script do these):${N}
   2. Raycast: finish onboarding and set its hotkey to ⌘Space.
   3. Sign in: run ${B}claude${N}, and for Codex either ${B}codex login${N} or, with an API key,
      ${B}printenv OPENAI_API_KEY | codex login --with-api-key${N}
-  4. Open a new terminal so PATH changes apply.
 EOF
+echo "${Y}${B}  4. Open a NEW terminal window (or run: exec zsh -l). claude, codex, tmux4 and brew"
+echo "     are not on this window's PATH, so they'd look missing here even though they're installed.${N}"
 [ ${#FAILED[@]} -eq 0 ]

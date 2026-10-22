@@ -14,6 +14,8 @@ Or from a clone: `./install.sh`. Takes a few minutes, mostly Homebrew downloads.
 | AltTab, Raycast, Codex CLI | `brew --cask` (skipped if already in /Applications) |
 | Claude Code | native installer → `~/.local/bin` |
 | `tmux/tmux.conf` | `~/.tmux.conf` (prefix is **Option-w**) |
+| `bin/tmux4` | `~/.local/bin/tmux4`: `tmux4 NAME [DIR]` opens a 2x2 tmux grid with codex in each pane |
+| `macos/capslock-option.plist` | Caps Lock → Option, applied now and at every login |
 | `skhd/skhdrc` | `~/.config/skhd/skhdrc` + launchd service |
 | Spotlight ⌘Space shortcut | disabled, so Raycast can use it |
 | `claude/settings.json`, `statusline.sh` | `~/.claude/` + plugins ponytail, warp, swift-lsp |

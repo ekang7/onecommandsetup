@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# tmux4 SESSION_NAME [START_DIR]: new tmux session with a 2x2 grid, codex running in each pane.
+session="${1:-}"
+start_dir="${2:-$PWD}"
+
+if [ -z "$session" ]; then
+  echo "Usage: tmux4 SESSION_NAME [START_DIR]"
+  exit 1
+fi
+
+if ! command -v tmux >/dev/null 2>&1; then
+  echo "Error: tmux is required"
+  exit 1
+fi
+
+if ! command -v codex >/dev/null 2>&1; then
+  echo "Error: codex is required"
+  exit 1
+fi
+
+if tmux has-session -t "$session" 2>/dev/null; then
+  echo "Error: tmux session '$session' already exists"
+  exit 1
+fi
+
+tmux new-session -d -s "$session" -c "$start_dir" -n codex || exit 1
+pane_tl="$(tmux display-message -p -t "$session:0.0" '#{pane_id}')"
+pane_tr="$(tmux split-window -h -t "$pane_tl" -c "$start_dir" -P -F '#{pane_id}')" || exit 1
+pane_br="$(tmux split-window -v -t "$pane_tr" -c "$start_dir" -P -F '#{pane_id}')" || exit 1
+pane_bl="$(tmux split-window -v -t "$pane_tl" -c "$start_dir" -P -F '#{pane_id}')" || exit 1
+tmux select-layout -t "$session:0" tiled >/dev/null 2>&1
+for pane in "$pane_tl" "$pane_tr" "$pane_br" "$pane_bl"; do
+  tmux send-keys -t "$pane" "codex" C-m
+done
+tmux select-pane -t "$pane_tl"
+
+tmux attach-session -t "$session"
