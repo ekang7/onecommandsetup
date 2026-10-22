@@ -47,6 +47,8 @@ install_brew() {
     [ -x /opt/homebrew/bin/brew ] || [ -x /usr/local/bin/brew ] \
       || NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || return 1
     eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv)"
+  else
+    brew update || true # stale cask URLs 404; a fresh install is already current
   fi
   profile_line "eval \"\$($(command -v brew) shellenv)\""
 }
