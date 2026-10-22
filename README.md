@@ -1,9 +1,9 @@
-# dotfiles
+# onecommandsetup
 
 One command sets up a Mac the way I use it:
 
 ```sh
-bash <(curl -fsSL https://raw.githubusercontent.com/ekang7/dotfiles/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/ekang7/onecommandsetup/main/install.sh)
 ```
 
 Or from a clone: `./install.sh`. Takes a few minutes, mostly Homebrew downloads. Safe to re-run.
@@ -29,4 +29,4 @@ Each step runs on its own, so one failure doesn't stop the rest. A report at the
 
 In Codex, invoke a skill with `$skill-name` (e.g. `$tdd-verification`). In Claude Code, use `/skill-name`.
 
-Fork it? Set `DOTFILES_REPO=you/dotfiles` before running.
+Fork it? Set `DOTFILES_REPO=you/onecommandsetup` before running.

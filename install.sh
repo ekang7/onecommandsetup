@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # One-shot macOS setup: tmux, skhd, AltTab, Raycast, Claude Code + Codex (config, plugins, skills).
-#   bash <(curl -fsSL https://raw.githubusercontent.com/ekang7/dotfiles/main/install.sh)
+#   bash <(curl -fsSL https://raw.githubusercontent.com/ekang7/onecommandsetup/main/install.sh)
 # Safe to re-run. Every step runs even if an earlier one fails; a report prints at the end.
 set -u
 
-REPO="${DOTFILES_REPO:-ekang7/dotfiles}"
+REPO="${DOTFILES_REPO:-ekang7/onecommandsetup}"
 LOG="$HOME/.dotfiles-install.log"
 BACKUP="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 export HOMEBREW_NO_AUTO_UPDATE=1 HOMEBREW_NO_INSTALL_CLEANUP=1 HOMEBREW_NO_ENV_HINTS=1
