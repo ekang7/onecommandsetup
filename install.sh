@@ -99,9 +99,12 @@ claude_plugin() { # claude_plugin <plugin@marketplace> <owner/repo>
 
 codex_config() { put "$DIR/codex/config.toml" ~/.codex/config.toml && put "$DIR/codex/rules/default.rules" ~/.codex/rules/default.rules; }
 
-codex_plugin() {
-  codex plugin marketplace add DietrichGebert/ponytail || codex plugin marketplace upgrade ponytail || true
-  codex plugin add ponytail@ponytail
+codex_plugin() { # "add" succeeds on an existing marketplace, so a stale catalog needs an explicit refresh
+  codex plugin marketplace add DietrichGebert/ponytail || true
+  codex plugin add ponytail@ponytail && return
+  codex plugin marketplace upgrade ponytail && codex plugin add ponytail@ponytail && return
+  codex plugin marketplace remove ponytail
+  codex plugin marketplace add DietrichGebert/ponytail && codex plugin add ponytail@ponytail
 }
 
 skills() { # skills <dest dir>
