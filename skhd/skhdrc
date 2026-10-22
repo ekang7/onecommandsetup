@@ -1,0 +1,116 @@
+# Map cmd + i/k for scrolling (replaces touchpad)
+# cmd - i : skhd -k "up" && skhd -k "up" && skhd -k "up" && skhd -k "up" && skhd -k "up"
+# cmd - k : skhd -k "down" && skhd -k "down" && skhd -k "down" && skhd -k "down" && skhd -k "down"
+
+# Scroll Up 5 times
+cmd - i : for i in {1..1}; do skhd -k "up"; done
+
+# Scroll Down 5 times
+cmd - k : for i in {1..1}; do skhd -k "down"; done
+
+# Super Fast Scroll Up (Cmd + Shift + I)
+cmd + shift - i : skhd -k "scroll 0:50:0"
+
+cmd + alt - j : skhd -k "cmd + alt - right"
+cmd + alt - k : skhd -k "cmd + alt - left"
+# Super Fast Scroll Down (Cmd + Shift + K)
+cmd + shift - k : skhd -k "scroll 0:-50:0"
+# Map option + ijkl to arrow keys
+# Basic arrow key navigation
+
+cmd + shift - c : cliclick c:.
+# Disabled to let cmux handle Cmd+Shift+D for split down.
+# cmd + shift - d : cliclick rc:.
+
+
+# option + h -> left arrow
+alt - h : skhd -k "left"
+
+# option + k -> up arrow
+alt - k : skhd -k "up"
+
+# option + l -> right arrow
+alt - l : skhd -k "right"
+
+# option + j -> down arrow
+alt - j : skhd -k "down"
+
+# Map Alt + u o to home end keys
+alt - u : skhd -k "ctrl - a"
+
+# Map Alt + y p to cmd + up/down arrow
+alt - y : skhd -k "cmd - up"
+
+# Map Alt + Shift + u o to select to home, select to end keys
+alt + shift - u : skhd -k "ctrl + shift - a"
+alt + shift - o : skhd -k "ctrl + shift - e"
+
+alt + ctrl - j : skhd -k "alt - left"
+alt + ctrl - l : skhd -k "alt - right"
+
+alt - o : skhd -k "backspace"
+alt - p : skhd -k "return"
+
+# Map cmd + ctrl + option + ijkl to word-by-word text selection
+cmd + ctrl + alt - i : skhd -k "shift + alt - up"
+cmd + ctrl + alt - j : skhd -k "shift + alt - left"
+cmd + ctrl + alt - k : skhd -k "shift + alt - down"
+cmd + ctrl + alt - l : skhd -k "shift + alt - right"
+
+# Map shift + option + ijkl to arrow keys
+# For iTerm window switching and navigation
+
+# shift + option + i -> up arrow
+shift + alt - i : skhd -k "cmd + alt - up"
+
+# shift + option + j -> left arrow
+shift + alt - j : skhd -k "cmd + alt - left"
+
+# shift + option + k -> down arrow
+shift + alt - k : skhd -k "cmd + alt - down"
+
+# shift + option + l -> right arrow
+shift + alt - l : skhd -k "cmd + alt - right"
+
+# Aerospace handles cmd + alt + ijkl directly now
+# (these mappings disabled to let keypresses pass through to Aerospace)
+
+# alt + shift - i : skhd -k "ctrl + alt - i"
+# alt + shift - j : skhd -k "ctrl + alt - j"
+# alt + shift - k : skhd -k "ctrl + alt - k"
+# alt + shift - l : skhd -k "ctrl + alt - l"
+
+# Map fn + option + ijkl to text navigation shortcuts
+# fn + option + j -> cmd + left (move to beginning of line)
+fn + alt - j : skhd -k "cmd - left"
+
+# fn + option + l -> cmd + right (move to end of line)
+fn + alt - l : skhd -k "cmd - right"
+
+# fn + option + i -> cmd + up (move to beginning of document)
+fn + alt - i : skhd -k "cmd - up"
+
+# fn + option + k -> cmd + down (move to end of document)
+fn + alt - k : skhd -k "cmd - down"
+
+# Paste git squash command for interactive rebase
+cmd + shift - s : echo -n '2,$s/^pick/squash/' | pbcopy && osascript -e 'tell application "System Events" to keystroke "v" using command down'
+
+# Disabled to let cmux handle Cmd+Shift+U for jump to latest unread.
+# cmd + shift - u : ~/.config/skhd/open-in-cursor.sh
+
+# Navigate Tabs Forward (Cmd + Alt + L)
+cmd + alt - l : [ "Brave Browser", "Notion" ] -> { \
+    osascript -e 'tell application "System Events" to keystroke "}" using {command down, shift down}'; \
+}
+
+# Navigate Tabs Backward (Cmd + Alt + J)
+cmd + alt - j : [ "Brave Browser", "Notion" ] -> { \
+    osascript -e 'tell application "System Events" to keystroke "{" using {command down, shift down}'; \
+}
+
+# Cycle to Most Recent Tab (Cmd + Alt + I)
+# Note: This uses the "Select Previous Tab" logic found in most Chromium apps
+cmd + alt - i : [ "Brave Browser", "Notion" ] -> { \
+    osascript -e 'tell application "System Events" to keystroke "9" using {command down, control down}'; \
+}
